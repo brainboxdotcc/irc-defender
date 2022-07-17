@@ -20,22 +20,20 @@ below. Support for other styles of ircd may be added on request however
 we may ask you for assistance in providing access to the said software 
 so that we may develop a solution.
 
-        +-------------------------------------+-------------+
-        | irc server                          | Link module |
-        +-------------------------------------+-------------+
-        | UnrealIRCd 3.1.1 -> 3.2             | unreal      |
-        | Bahamut 1.8.x                       | bahamut     |
-        | UltimateIRCd 3.x                    | ultimate    |
-        | Bahamut 1.4.x (unstable)            | ultimate    |
-        | Hybrid 7.x                          | hybrid      |
-        | P10 (IRCu, beware ircd, etc.)       | p10         |
-        | UnrealIRCd client mode (deprecated) | client      |
-        | TR-IRCD                             | trircd      |
-        | ptlink                              | ptlink6     |
-        | ircd 2.10 (RFC 2813)                | ircd210     |
-        | InspIRCd Beta 6 to 1.0.7            | inspircd10  |
-        | InspIRCd 1.1.0 Beta 2 onwards       | inspircd11  |
-        +-------------------------------------+-------------+
+| irc server                          | Link module |
+|-------------------------------------|-------------|
+| UnrealIRCd 3.1.1 -> 3.2             | unreal      |
+| Bahamut 1.8.x                       | bahamut     |
+| UltimateIRCd 3.x                    | ultimate    |
+| Bahamut 1.4.x (unstable)            | ultimate    |
+| Hybrid 7.x                          | hybrid      |
+| P10 (IRCu, beware ircd, etc.)       | p10         |
+| UnrealIRCd client mode (deprecated) | client      |
+| TR-IRCD                             | trircd      |
+| ptlink                              | ptlink6     |
+| ircd 2.10 (RFC 2813)                | ircd210     |
+| InspIRCd Beta 6 to 1.0.7            | inspircd10  |
+| InspIRCd 1.1.0 Beta 2 onwards       | inspircd11  |
 
 Thanks to WhiteWolf for submitting the TR-IRCD module used in ircdefender,
 and thanks to openglx for his ptlink6 module, both of which are available
@@ -85,18 +83,16 @@ are normally allocated to you by the network administration of the
 network you link your server to. Depending on the module you select you 
 will have to define a line in your conf as follows:
 
-numeric=<your allocated server numeric>
+`numeric=<your allocated server numeric>`
 
 At present, only three of the four modules in this distribution make use 
 of numerics, and the formats are as follows:
 
- +-------------------+---------------------------------+---------------+
- | module type       | numeric format                  |  example      |
- +-------------------+---------------------------------+---------------+
- | unreal            | integer number, 1..255          |    156        |
- | p10               | two alphanumeric characters     |  QZ B5 f4 hE  |
- | trircd            | integer number, 1..255          |    28         |
- +-------------------+---------------------------------+---------------+
+| module type       | numeric format                  |  example      |
+|-------------------|---------------------------------|---------------|
+| unreal            | integer number, 1..255          |    156        |
+| p10               | two alphanumeric characters     |  QZ B5 f4 hE  |
+| trircd            | integer number, 1..255          |    28         |
 
 ## Starting the program
 
@@ -136,7 +132,7 @@ though the bot was just reloaded by hand. It your server software does
 not support remote rehashing, then you may do this instead on the bot's
 control channel:
 
-botnick rehash
+`botnick rehash`
 
 which will have the same effect as a /rehash on servers which support it.
 
@@ -158,18 +154,18 @@ left to right.
 
 To list all loaded modules, and show the program uptime, simply type:
 
-status
+`status`
 
 on it's control channel.
 
 If you wish for (very) verbose output you may type:
 
-status all
+`status all`
 
 if you want the program to report verbose information for one module
 only you may do this by typing:
 
-status [module-name]
+`status [module-name]`
 
 where module-name is the name of a module which is loaded.
 
@@ -188,7 +184,7 @@ gecos, nick and ident combinations a heavier weighting. The paranoia=
 score in the config indicates how sensitive this should be, you are 
 STRONGLY recommended to leave it at the default of 7.
 
-Supported commands: fyle scan [nick] [ident] [gecos]
+Supported commands: `fyle scan [nick] [ident] [gecos]`
 
 Note that to make this module work you will require the words.txt file 
 from the project page at http://www.sourceforge.net/projects/ircdefender/
@@ -198,9 +194,9 @@ from the project page at http://www.sourceforge.net/projects/ircdefender/
 The killchan module will deny users access to specified channels. To use
 the killchan module, use the following commands on the control channel:
 
-killchan add [channel] [reason]
-killchan list
-killchan del [channel]
+`killchan add [channel] [reason]`
+`killchan list`
+`killchan del [channel]`
 
 When a non-oper joins a blacklisted channel, they will be temporarily
 G-Lined (the default is for 30 minutes). If an oper joins the forbidden
@@ -238,7 +234,7 @@ send a message to all AOL users, or to all users in finland, or to all
 users with broken idents (or even all users whose ident contains a 
 number, the possibilities are huge!) The module supports one command:
 
-re_notice [regexp] [message]
+`re_notice [regexp] [message]`
 
 The regexp is not automatically anchored, so where required remember to 
 use ^ and $ to anchor your regexp. (if you are unsure on the syntax of 
@@ -249,7 +245,7 @@ regular expressions, google is as good source of help as anything).
 This module detects nickfloods. You must add a value to your config 
 file as follows:
 
-nickflood_limit=5
+`nickflood_limit=5`
 
 This will /KILL all users who exceed 5 nickchanges in 5 seconds. When a 
 user is killed, a message is put onto the control channel to announce it.
@@ -262,17 +258,19 @@ disable accidentally or otherwise (however they can override any locks
 by setting chanserv modelocks). The module has three thresholds and an 
 interval,  which can be set in the config file as follows:
 
+```
 flood_log=5
 flood_globops=10
 flood_lock=15
 flood_interval=5
+```
 
 The first value is how many joins and parts constitute logging to the 
 channel. If a channel has this many joins and parts, it will be logged 
 on the channel you designated as Defender's "home" channel, e.g.:
 
-<Defender> Channel #test has had 6 joins/parts in the past 5 seconds, 
-10 triggers oper alert.
+`<Defender> Channel #test has had 6 joins/parts in the past 5 seconds, 
+10 triggers oper alert.`
 
 The second value, if exceeded, causes the service to put out a GLOBOPS 
 similar to above except sent to all opers.
@@ -297,13 +295,11 @@ escape characters such as \[ and \!) Any users that oper up who's nicks
 do not match nicks in the config file will be de-opered by the service, 
 providing a second level of security against:
 
-   o    Users who try to add o:lines for themselves for example during
-	trial links
-   o    Admins who may try and add local oper status for their friends
-   o    Containment of compromised boxes where o:lines are added by
-	intruders
+* Users who try to add o:lines for themselves for example during trial links
+* Admins who may try and add local oper status for their friends
+* Containment of compromised boxes where o:lines are added by intruders
 
-   etc etc...
+etc etc...
 
 You might think that these situations can be limited if your selection 
 process is strict enough, but why take the risk? :-)
@@ -329,9 +325,11 @@ This module allows you to set regexp based akills on users based on
 nick, ident, host and gecos. Please see the comments in the module file 
 for examples.
 
-Supported commands: regexp_akill add [hostmask] [reason]
-                    regexp_akill del [hostmask]
-                    regexp_akill list
+Supported commands:
+
+`regexp_akill add [hostmask] [reason]`
+`regexp_akill del [hostmask]`
+`regexp_akill list`
 
 As of v1.3.6, this module will set a timed G-line (ten minutes) when it 
 matches a banned nick, host or GECOS to prevent hammering of the server 
@@ -344,9 +342,11 @@ blacklist to stop blacklisted client versions from connecting to your
 network. You should create a tab-separated file in your data dir, 
 formatted as follows:
 
+```
 regexp	G	ban-reason
 regexp2	G	ban-reason2
 regexp3 W	warning-1
+```
 
 The first field is a regexp. If the regexp matches the version of a
 connecting client (e.g. "mirc.+6\..+") then an action will be taken.
@@ -359,11 +359,13 @@ the third field is sent to the user as-is.
 
 #### Example config:
 
+```
 Bottler.+	G	XDCC Looker bots are not allowed here!
 mIRC.+5\.+Bey	W	You are running an insecure mirc version, please upgrade
 mIRC.+3\.+	W	Why are you running a 10 year old copy of mirc?
 eggdrop.+	G	NO BOTS!
 x-chat\s2\.0\.5	W	Insecure x-chat version, please upgrade asap
+```
 
 
 This module also supports simple surveying of client verisons, so that 
@@ -381,7 +383,7 @@ and fire off an alert via GLOBOPS if the limit increases past an
 administrator defined level. You must add a line such as the following 
 to your defender.conf:
 
-conn_average_max=100
+`conn_average_max=100`
 
 This indicates that if the connections per minute over the entire 
 network increases past 100, the notice should be sent out.
@@ -397,8 +399,10 @@ Because this is relatively resource intensive, a channel must be monitored
 explicitly by issuing the 'monitor' command on the control channel. The valid
 commands are as follows:
 
+```
 spammage monitor [#channel] [threshold] [reason]
 spammage unmonitor [#channel]
+```
 
 When a channel is being monitored, a line must be repeated [threshold] times
 before the protection is activated. Once the protection is activated, users
@@ -408,10 +412,7 @@ this makes this module particularly effective against certain types of
 spambots, but weak against others. Use this module where you think it would
 have a noticable effect (e.g. where all the bots repeat the same phrase).
 
-		+---------------------------------------------+
-		| Parts of this software based on PotBot      |
-		| (a simple perl bot: http://potbot.lv6.net/) |
-		+---------------------------------------------+
+**Parts of this software based on PotBot (a simple perl bot: http://potbot.lv6.net/)**
 
 ## Contact
 
@@ -420,7 +421,7 @@ irc.chatspike.net, or by the sourceforge project page at
 http://ircdefender.sourceforge.net/
 
 -------------------------------------------------------------------------------
-
+```
 
 		    GNU GENERAL PUBLIC LICENSE
 		       Version 2, June 1991
@@ -763,3 +764,4 @@ consider it more useful to permit linking proprietary applications with the
 library.  If this is what you want to do, use the GNU Library General
 Public License instead of this License.
 
+```
