@@ -1,5 +1,5 @@
-IRC Defender - http://ircdefender.sourceforge.net/
-==================================================
+# irc-defender
+IRC Defender was a malware/bot detector for IRC networks. This is deprecated, non-maintained and listed only for historical purposes. Do not run this in production!
 
 Developed for irc.chatspike.net and the irc community
 
@@ -13,8 +13,7 @@ brain@chatspike.net so that we can get a rough idea of
 how many users are using this program :-)
 
 
-Supported software
-------------------
+## Supported software
 
 To use this program, your irc software must be listed in the table 
 below. Support for other styles of ircd may be added on request however 
@@ -48,8 +47,7 @@ and reed who gave advice and code for the P10 link protocol (also
 thanks for writing such an easy-to-follow spec for what is a complex
 protocol!).
 
-Shared Blocks And U:Lines
--------------------------
+## Shared Blocks And U:Lines
 
 If you link to an InspIRCd server, you must define a <uline> tag for
 your defender server, for example:
@@ -80,8 +78,7 @@ nick 'Defender'.
 On an ircd2.10 server, glines and globops are emulated by irc defender,
 and restarts of the service will reset all emulated glines.
 
-The server numeric
-------------------
+## The server numeric
 
 Certain server types feature what is known as a 'server numeric'. These
 are normally allocated to you by the network administration of the 
@@ -101,8 +98,7 @@ of numerics, and the formats are as follows:
  | trircd            | integer number, 1..255          |    28         |
  +-------------------+---------------------------------+---------------+
 
-Starting the program
---------------------
+## Starting the program
 
 See the example config file for details of configuration.
 Start the program with "perl defender.pl"
@@ -113,8 +109,7 @@ your channel (e.g. set +O on it) so that normal users may not access
 these commands!
 
 
-Deciding what modules to use
-----------------------------
+## Deciding what modules to use
 
 The program is modular, therefore you must select the modules you wish 
 to use before proceeding with running the program. There are two 
@@ -130,8 +125,7 @@ perform the actual scanning operations on users as they connect or
 interact with the service.
 
 
-Rehashing/Changing modules on the fly
--------------------------------------
+## Rehashing/Changing modules on the fly
 
 While the program is running, you may edit its config file then do a
 remote rehash (e.g. via /rehash defender.*) to cause its configuration
@@ -147,8 +141,7 @@ botnick rehash
 which will have the same effect as a /rehash on servers which support it.
 
 
-Load order
-----------
+## Load order
 
 As with most modular programs, the load order of your modules is
 important. Each module in defender has a set of dependencies, and a set
@@ -161,8 +154,7 @@ config. Modules are loaded in order entered into the config file, from
 left to right.
 
 
-Listing loaded modules
-----------------------
+## Listing loaded modules
 
 To list all loaded modules, and show the program uptime, simply type:
 
@@ -183,13 +175,11 @@ where module-name is the name of a module which is loaded.
 
 
 
-Included modules
-================
+## Included modules
 
 The following modules are included in the base distribution:
 
-fyle
-----
+### fyle
 
 This module scans for anatoly/fyle drones, e.g. bots with nicks such as 
 `|\{{] which join and part large channels in search of people to spam 
@@ -203,8 +193,7 @@ Supported commands: fyle scan [nick] [ident] [gecos]
 Note that to make this module work you will require the words.txt file 
 from the project page at http://www.sourceforge.net/projects/ircdefender/
 
-killchan
---------
+### killchan
 
 The killchan module will deny users access to specified channels. To use
 the killchan module, use the following commands on the control channel:
@@ -231,20 +220,17 @@ TIP: It is a GOOD idea to put a killchan on your defender control channel,
      will ALWAYS be inaccessible to non-opers.
  
 
-message
--------
+### message
 
 This simple module replies with a server notice if the bot is messaged, 
 asking users to refer to your support channel for help.
 
-fizzer
-------
+### fizzer
 
 This module eliminates fizzer drones. It has no configuration options 
 or commands.
 
-re_notice
----------
+### re_notice
 
 This module allows you to send a notice to all users on your network 
 which match a given regular expression pattern. For example, you could 
@@ -258,8 +244,7 @@ The regexp is not automatically anchored, so where required remember to
 use ^ and $ to anchor your regexp. (if you are unsure on the syntax of 
 regular expressions, google is as good source of help as anything).
 
-nickflood
----------
+### nickflood
 
 This module detects nickfloods. You must add a value to your config 
 file as follows:
@@ -269,8 +254,7 @@ nickflood_limit=5
 This will /KILL all users who exceed 5 nickchanges in 5 seconds. When a 
 user is killed, a message is put onto the control channel to announce it.
 
-flood
------
+### flood
 
 This module prevents large-scale botnet flooding of channels on your 
 network. It provides a layer of protection which a channel cannot 
@@ -301,16 +285,15 @@ The fourth value is the 'interval', e.g. how long to let the counters
 build up for. For example if you set this to 5, all the counters will 
 be X joins/5 secs.
 
-secureoper
-----------
+### secureoper
 
 This module watches for oper-ups. It can only be run when your defender 
 is running using a server protocol and not when your defender is 
 operating as an opered client. It will also require you to U:Line the 
 server on your network so that it can deoper clients. You must define a 
 list of regexp nicknames in the file opernicks.conf (in the config 
-directory), seperated by newlines. For example, \[Brain\] (remember to 
-escape characters such as [ and \!) Any users that oper up who's nicks 
+directory), seperated by newlines. For example, \\\[Brain\\\] (remember to 
+escape characters such as \[ and \!) Any users that oper up who's nicks 
 do not match nicks in the config file will be de-opered by the service, 
 providing a second level of security against:
 
@@ -325,8 +308,7 @@ providing a second level of security against:
 You might think that these situations can be limited if your selection 
 process is strict enough, but why take the risk? :-)
 
-cgiirc
-------
+### cgiirc
 
 This module blocks cgi:irc users from accessing your network without 
 accessing it from an authorised site.
@@ -341,8 +323,7 @@ As of v1.3.6, this module will set a timed G-line (ten minutes) when it
 detects a cgi:irc client, to prevent hammering of the server and 
 spamming of the control channel.
 
-regexp_akill
-------------
+### regexp_akill
 
 This module allows you to set regexp based akills on users based on 
 nick, ident, host and gecos. Please see the comments in the module file 
@@ -356,8 +337,7 @@ As of v1.3.6, this module will set a timed G-line (ten minutes) when it
 matches a banned nick, host or GECOS to prevent hammering of the server 
 and spamming of the control channel.
 
-version
--------
+### version
 
 This module serves two purposes. Firstly it can maintain a version 
 blacklist to stop blacklisted client versions from connecting to your 
@@ -377,8 +357,7 @@ W in this field makes the module warn the user via privmsg, notifying
 them so that they may fix the problem. In this case the text given in
 the third field is sent to the user as-is.
 
-Example config:
----------------
+#### Example config:
 
 Bottler.+	G	XDCC Looker bots are not allowed here!
 mIRC.+5\.+Bey	W	You are running an insecure mirc version, please upgrade
@@ -395,8 +374,7 @@ As of v1.3.6, this module will set a timed G-line (ten minutes) when it
 detects a banned version response, to prevent hammering of the server 
 and spamming of the control channel.
 
-conn_average
-------------
+### conn_average
 
 This module will monitor the connections per minute on all your servers 
 and fire off an alert via GLOBOPS if the limit increases past an 
@@ -408,8 +386,7 @@ conn_average_max=100
 This indicates that if the connections per minute over the entire 
 network increases past 100, the notice should be sent out.
 
-spammage
---------
+### spammage
 
 The spammage module is new to 1.4.x, and will detect repeated lines in
 a channel, wether or not these lines actually come from seperate clients,
@@ -436,7 +413,7 @@ have a noticable effect (e.g. where all the bots repeat the same phrase).
 		| (a simple perl bot: http://potbot.lv6.net/) |
 		+---------------------------------------------+
 
-Contact:
+## Contact
 
 You may contact the authors of this software at #Defender on 
 irc.chatspike.net, or by the sourceforge project page at 
