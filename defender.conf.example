@@ -1,0 +1,242 @@
+#!/usr/bin/perl defender.pl
+# ------------------------------------------------------------------------------------ #
+#                                                                                      #
+#                         IRC Defender example config                                  #
+#                         ---------------------------                                  #
+#                                                                                      #
+# Please read all of the config file before you run the program. Save your live config #
+# file as 'defender.conf' in the same directory as the defender.pl script.             #
+#                                                                                      #
+# You may use the construct %xx to insert any non-ascii character into the config      #
+# file, e.g. %3D inserts a literal "=" symbol.                                         #
+# You must not have spaces between the variable name, the = symbol, and its value.     #
+#                                                                                      #
+# Warning! DO NOT EDIT THIS TEXT FILE IN A WINDOWS EDITOR! EDIT IT IN YOUR SHELL OR    #
+# IT WILL FAIL TO READ CORRECTLY AND YOU WILL GET ALL KINDS OF STRANGE ERRORS! YOU     #
+# HAVE BEEN WARNED!                                                                    #
+#                                                                                      #
+# $Id: defender.conf.example 7976 2007-08-28 20:17:42Z Thunderhacker $
+#                                                                                      #
+# ------------------------------------------------------------------------------------ #
+
+
+# ------
+# Paranoia level. Set this to the maximum allowed score. It is *STRONGLY*
+# recommended you leave this at the default value of 7.
+# this is used by the fyle module only presently, but other modules may
+# use it some day.
+# ------
+
+paranoia=7
+
+
+# ------
+# Client's fullname (GECOS)
+# ------
+
+fullname=IRC Defender
+
+
+# -----
+# Server to connect to
+# -----
+
+server=localhost
+
+
+# -----
+# IP to bind socket to
+# -----
+
+bind=127.0.0.1
+
+
+# -----
+# Port number of server
+# -----
+
+port=7025
+
+
+# -----
+# Client's nickname
+# -----
+
+botnick=Defender
+
+
+# -----
+# secured channel to join
+# -----
+
+channel=#services
+
+
+# -----
+# quit message on SIGKILL
+# -----
+
+quitmsg=Defender terminating
+
+
+# -----
+# Data directory, defaults to current directory if not defined
+# -----
+
+datadir=/home/path/to/data/defender
+
+
+# -----
+# email given in /kill messages
+# -----
+
+mail=brain@chatspike.net
+
+
+# -----
+# url to refer to for how the system works, given in /kill messages
+# -----
+
+url=http://www.chatspike.net/?page%3Dkilled
+
+
+# -----
+# Hostname used for pseudoclient
+# -----
+
+domain=chatspike.net
+
+
+# -----
+# Network name, used in kills and messages
+# -----
+
+networkname=ChatSpike
+
+
+# -----
+# Which protocol module to use, server is recommended, client supports unrealircd
+# -----
+
+linktype=unreal
+
+
+# -----
+# Server link password, or client connect password if on a restricted I: line
+# -----
+
+password=this_is_my_server_link_password
+
+
+# -----
+# Server to connect as, you probably should U: line this if possible
+# -----
+
+servername=defender.chatspike.net
+
+
+# -----
+# Server numeric for unrealircd and p10. Read the README!
+# -----
+
+numeric=200
+
+
+# -----
+# Server description
+# -----
+
+serverdesc=IRC Defender Server
+
+
+# -----
+# Auth module Type
+# -----
+
+authtype=basic
+
+
+# -----
+# scanning modules to load, seperated by commas. See Modules/Scan directory
+# -----
+
+modules=fyle,cgiirc,regexp_akill,version,conn_average
+
+
+# -----
+# Logging module name (default is Text, for logging to file)
+# -----
+
+logto=Text
+logpath=/home/brain/defender/defender.log
+
+
+# -----
+# Parameter for conn_average module, how many connections per min counts as an alert
+# -----
+
+conn_average_max=3
+
+# ----
+# Option for version module, do you want to ban on one word version replies?
+# This can have a lot of false positives, so default no.
+# Change to 1 for yes
+# ----
+
+OneWord=0
+
+# -----
+# This should contain your support channel's name
+# -----
+
+supportchannel=#chatspike
+
+
+# -----
+# Parameters for the flood module, how many joins/parts trigger actions and the
+# size of the checking interval
+# -----
+
+flood_log=1
+flood_globops=2
+flood_lock=3
+flood_interval=5
+
+
+# -----
+# Parameters for the nickflood module, how many nickchanges are a flood, and
+# the size of the checking interval
+# -----
+
+nickflood_limit=3
+
+
+# ------------------------ Deprecated ---------------------------
+#
+# These values are used only by the client module,
+# and can therefore be considered deprecated. However
+# if you are behind the times enough to be using the
+# client module (or this is all that is available to
+# you) then you MUST define these values.
+#
+#       -----
+#       name to /oper as, used only by the client module
+#       -----
+#
+#       opername=myoper
+#
+#       -----
+#       password to use in /oper, used only by the client
+#       module
+#       -----
+#
+#       operpass=my_password_here
+#
+#       -----
+#       Nickserv password to identify to nickserv, used
+#       only by the client module
+#       -----
+#
+#       nickserv=my_nspass
+#
+
